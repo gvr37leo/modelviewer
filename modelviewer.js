@@ -52,7 +52,7 @@ class ModelViewer{
         }
 
         let gltfloader = new GLTFLoader()
-        gltfloader.setPath('./resources/enterprise/')
+        gltfloader.setPath(`./resources/${settings.src}/`)
         gltfloader.load('scene.gltf', (gltf) => {
             gltf.scene.traverse(c => c.castShadow = true)
             this.scene.add(gltf.scene)
@@ -60,6 +60,15 @@ class ModelViewer{
                 this.model.rotation.z += dt * TAU * settings.autorotatespeed;
             }
             this.model = gltf.scene.children[0]
+        },() => {}, () => {
+            this.model = new THREE.Mesh( 
+                new THREE.BoxGeometry(), 
+                new THREE.MeshStandardMaterial( { color: 'red' } ) 
+            );
+            this.model.position.set(0, 1, 0);
+            this.model.castShadow = true;
+            this.model.receiveShadow = true;
+            this.scene.add(this.model);
         })
 
         if(settings.background){
@@ -80,7 +89,7 @@ class ModelViewer{
         
 
 
-        let directionallight = new THREE.DirectionalLight(0xFFFFFF,0.8);
+        let directionallight = new THREE.DirectionalLight('#fff',0.8);
         directionallight.position.set(20, 100, 10);
         directionallight.target.position.set(0, 0, 0);
         directionallight.castShadow = true;
@@ -95,30 +104,12 @@ class ModelViewer{
         directionallight.shadow.camera.bottom = -40;
         this.scene.add(directionallight);
 
-        let ambientlight = new THREE.AmbientLight(0xFFFFFF,0.5);
+        let ambientlight = new THREE.AmbientLight('#fff',0.5);
         this.scene.add(ambientlight);
 
 
 
-        // const plane = new THREE.Mesh(
-        // new THREE.PlaneGeometry(100, 100, 10, 10),
-        // new THREE.MeshStandardMaterial({
-        //     color: 0xFFFFFF,
-        // }));
-        // plane.castShadow = false;
-        // plane.receiveShadow = true;
-        // plane.rotation.x = -Math.PI / 2;
-        // this.scene.add(plane);
-
-
-        // this.model = new THREE.Mesh( 
-        //     new THREE.BoxGeometry(), 
-        //     new THREE.MeshStandardMaterial( { color: 0xFFFFFF } ) 
-        // );
-        // this.model.position.set(0, 1, 0);
-        // this.model.castShadow = true;
-        // this.model.receiveShadow = true;
-        // this.scene.add(this.model);
+        
 
         
 
