@@ -1,4 +1,4 @@
-import {ModelViewer} from '/modelviewer.js'
+import {ModelViewer} from './modelviewer.js'
 
 load3DModels()
 
