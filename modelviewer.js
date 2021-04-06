@@ -65,12 +65,12 @@ class ModelViewer{
         if(settings.background){
             let cubeloader = new THREE.CubeTextureLoader()
             let texture = cubeloader.load([
-                `/resources/cubemaps/${settings.background}/px.jpg`,
-                `/resources/cubemaps/${settings.background}/nx.jpg`,
-                `/resources/cubemaps/${settings.background}/py.jpg`,
-                `/resources/cubemaps/${settings.background}/ny.jpg`,
-                `/resources/cubemaps/${settings.background}/pz.jpg`,
-                `/resources/cubemaps/${settings.background}/nz.jpg`,
+                `./resources/cubemaps/${settings.background}/px.jpg`,
+                `./resources/cubemaps/${settings.background}/nx.jpg`,
+                `./resources/cubemaps/${settings.background}/py.jpg`,
+                `./resources/cubemaps/${settings.background}/ny.jpg`,
+                `./resources/cubemaps/${settings.background}/pz.jpg`,
+                `./resources/cubemaps/${settings.background}/nz.jpg`,
             ])
             this.scene.background = texture
         }
