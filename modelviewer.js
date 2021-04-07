@@ -6,16 +6,8 @@ const TAU = Math.PI * 2
 
 class ModelViewer{
     lastupdate
-
-
-    //src '' empty string loads cube
-    //rotate/draggable by hand  true
-    //auto rotate speed 0.25
-    //ortho perspective perspective
-    //camera pos 0 2 -10
-    //camera focus 0 1 0
-    //fov 90
-    //background
+    interacting = false
+    requiresUpdate = false
 
     constructor(element){
         this.element = element
@@ -42,24 +34,37 @@ class ModelViewer{
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(width, height);
+        this.resize()
         this.element.appendChild(this.renderer.domElement);
+        this.renderer.domElement.addEventListener('wheel',() => {
+            this.requiresUpdate = true
+        })
 
         if(settings.interactable){
             const controls = new OrbitControls(this.camera, this.renderer.domElement);
             controls.target.copy(settings.cameralookat);
+            if(settings.lockY){
+                controls.minPolarAngle = Math.PI / 2
+                controls.maxPolarAngle = Math.PI / 2
+            }
             controls.update();
+            controls.addEventListener('start',() => {
+                this.interacting = true
+            })
+            controls.addEventListener('end', () => {
+                this.interacting = false
+            })
         }
 
         let gltfloader = new GLTFLoader()
-        gltfloader.setPath(`./resources/${settings.src}/`)
-        gltfloader.load('scene.gltf', (gltf) => {
+        gltfloader.load(settings.src, (gltf) => {
             gltf.scene.traverse(c => c.castShadow = true)
             this.scene.add(gltf.scene)
             this.update = (dt) => {
                 this.model.rotation.z += dt * TAU * settings.autorotatespeed;
             }
             this.model = gltf.scene.children[0]
+            this.renderer.render( this.scene, this.camera );
         },() => {}, () => {
             this.model = new THREE.Mesh( 
                 new THREE.BoxGeometry(), 
@@ -80,7 +85,9 @@ class ModelViewer{
                 `./resources/cubemaps/${settings.background}/ny.jpg`,
                 `./resources/cubemaps/${settings.background}/pz.jpg`,
                 `./resources/cubemaps/${settings.background}/nz.jpg`,
-            ])
+            ],() => {
+                this.renderer.render( this.scene, this.camera );
+            })
             this.scene.background = texture
         }
         
@@ -89,7 +96,7 @@ class ModelViewer{
         
 
 
-        let directionallight = new THREE.DirectionalLight('#fff',0.8);
+        let directionallight = new THREE.DirectionalLight(settings.lightcolor, 0.8);
         directionallight.position.set(20, 100, 10);
         directionallight.target.position.set(0, 0, 0);
         directionallight.castShadow = true;
@@ -104,7 +111,7 @@ class ModelViewer{
         directionallight.shadow.camera.bottom = -40;
         this.scene.add(directionallight);
 
-        let ambientlight = new THREE.AmbientLight('#fff',0.5);
+        let ambientlight = new THREE.AmbientLight(settings.lightcolor, 0.5);
         this.scene.add(ambientlight);
 
 
@@ -118,10 +125,14 @@ class ModelViewer{
             this.lastupdate = Date.now()
             requestAnimationFrame(animate);
             this.update(dt)
-            this.renderer.render( this.scene, this.camera );
+            if(this.interacting || settings.autorotatespeed > 0 || this.requiresUpdate){
+                this.renderer.render( this.scene, this.camera );
+                this.requiresUpdate = true
+            }
         }
         this.lastupdate = Date.now()
         animate();
+        
 
         window.addEventListener('resize', () => {
             this.resize()
@@ -139,6 +150,8 @@ class ModelViewer{
         settings.cameralookat = parseVector(this.element.getAttribute('cameralookat') ?? '0 0 0')
         settings.fov = parseFloat(this.element.getAttribute('fov') ?? '75')
         settings.transparent = parseBool(this.element.getAttribute('transparent') ?? 'true')
+        settings.lightcolor = this.element.getAttribute('lightcolor') ?? '#fff'
+        settings.lockY = parseBool(this.element.getAttribute('lockY') ?? 'false')
         return settings
     }
 
@@ -152,7 +165,8 @@ class ModelViewer{
         var height = this.element.clientHeight
         this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(width, height);
+        this.requiresUpdate = true
+        this.renderer.setSize(width, height, false);
     }
 }
 

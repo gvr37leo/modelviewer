@@ -9,3 +9,14 @@ function load3DModels(){
         new ModelViewer(element)
     }
 }
+
+
+class Test{
+    constructor(){
+
+    }
+
+    init(){
+        
+    }
+}

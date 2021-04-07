@@ -17,6 +17,7 @@
         }
 
         model3D canvas{
+            width: 100%;
             outline: none;
         }
 
@@ -25,26 +26,34 @@
             flex-wrap: wrap;
         }
 
-        .gallery *{
+        .gallery > *{
             width: 50%;
+        }
+
+        .border{
+            border:1px solid black;
         }
 
     </style>
 </head>
 <body> 
-    <model3D src="enterprise" camerapos="10 3.3 4.3" background="milkyway" style="width: 100%; height: 500px;"></model3D>
+
+    <!-- <canvas class="border" style="width: 50%; display: flex;"></canvas> -->
+
+    <model3D src="./resources/enterprise/scene.gltf" camerapos="10 3.3 4.3" background="milkyway" style="width: 100%; height: 500px;"></model3D>
 
     <div class="gallery" style="display: flex;">
-        <model3D src="perplex" camerapos="0.5666768990866082 0.16578470329897418 -0.14161933757537096" ></model3D>
+        <model3D src="./resources/perplex/scene.gltf" camerapos="0.6 0.16 -0.14" cameralookat="0 0.2 0" lightcolor="#fff" lockY="true"></model3D>
         <img src="./resources/duck.jpg"/>
         <img src="./resources/duck.jpg"/>
         <img src="./resources/duck.jpg"/>
-        <model3D src="mask" camerapos="0 0 0.5" background="castle" interactable="false"  autorotatespeed="0.1"  ></model3D>
+        <model3D src="./resources/mask/scene.gltf" camerapos="0 0 0.5" background="castle" interactable="false"  autorotatespeed="0.1"  ></model3D>
         <img src="./resources/duck.jpg"/>
         <img src="./resources/duck.jpg"/>
-        <model3D src="enterprise" camerapos="9.9 1.3 12"  background="bridge" fov="30" ></model3D>
+        <model3D src="./resources/enterprise/scene.gltf" camerapos="9.9 1.3 12"  background="bridge" fov="30" ></model3D>
         <img src="./resources/duck.jpg"/>
         <img src="./resources/duck.jpg"/>
+        <model3D src="./resources/cube/scene.gltf"></model3D>
     </div>
 
     
