@@ -146,7 +146,7 @@ class ModelViewer{
         settings.interactable = parseBool(this.element.getAttribute('interactable') ?? 'true')
         settings.autorotatespeed = parseFloat(this.element.getAttribute('autorotatespeed') ?? '0')
         settings.cameratype = this.element.getAttribute('cameratype') ?? 'perspective'
-        settings.camerapos = parseVector(this.element.getAttribute('camerapos') ?? '0 2 -10') 
+        settings.camerapos = parseVector(this.element.getAttribute('camerapos') ?? '0 2 -4') 
         settings.cameralookat = parseVector(this.element.getAttribute('cameralookat') ?? '0 0 0')
         settings.fov = parseFloat(this.element.getAttribute('fov') ?? '75')
         settings.transparent = parseBool(this.element.getAttribute('transparent') ?? 'true')
