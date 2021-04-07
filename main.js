@@ -1,5 +1,13 @@
 import {ModelViewer} from './modelviewer.js'
 
+//todo
+//animation
+//import other models
+//ortho
+//(parralax)
+
+
+
 load3DModels()
 
 function load3DModels(){
@@ -11,12 +19,4 @@ function load3DModels(){
 }
 
 
-class Test{
-    constructor(){
 
-    }
-
-    init(){
-        
-    }
-}
