@@ -199,9 +199,8 @@ function parseVector(str){
 window.exportCameraSettings = (model3del) => {
     var camera = model3del.modelviewer.camera
     var pos = camera.position
-    console.log(`camerapos="${pos.x.toFixed(1)} ${pos.y.toFixed(1)} ${pos.z.toFixed(1)}"`)    
     var lookat = model3del.modelviewer.controls.target
-    console.log(`lookat="${lookat.x.toFixed(1)} ${lookat.y.toFixed(1)} ${lookat.z.toFixed(1)}"`)
+    console.log(`camerapos="${pos.x.toFixed(1)} ${pos.y.toFixed(1)} ${pos.z.toFixed(1)}"`,`lookat="${lookat.x.toFixed(1)} ${lookat.y.toFixed(1)} ${lookat.z.toFixed(1)}"`)    
 }
 
 export {ModelViewer}

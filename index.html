@@ -21,18 +21,10 @@
             outline: none;
         }
 
-        .gallery{
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .gallery > *{
-            width: 50%;
-        }
-
         .border{
             border:1px solid black;
         }
+
 
     </style>
 </head>
@@ -40,30 +32,69 @@
 
     <!-- <canvas class="border" style="width: 50%; display: flex;"></canvas> -->
 
-    <model3D src="./resources/enterprise/scene.gltf" camerapos="10 3.3 4.3" background="milkyway" style="width: 100%; height: 500px;"></model3D>
+    <model3D src="./resources/enterprise/scene.gltf" camerapos="10 3.3 4.3" background="milkyway" autorotatespeed="0.02" style="width: 100%; height: 500px;"></model3D>
 
-    <div class="gallery" style="display: flex;">
-        <model3D src="./resources/person/man.fbx"></model3D>
-        <img src="./resources/duck.jpg"/>
-        <model3D src="./resources/perplex/scene.gltf" camerapos="0.6 0.16 -0.14" lookat="0 0.2 0" lockY="true"></model3D>
-        <img src="./resources/duck.jpg"/>
-        <img src="./resources/duck.jpg"/>
-        <model3D src="./resources/peter/perplex.glb" camerapos="-2.3 5.5 6.5" lookat="0.0 2.1 -1.2" lightcolor="#bbb"></model3D>
-        <img src="./resources/duck.jpg"/>
-        <model3D src="./resources/mask/scene.gltf" camerapos="0 0 0.5" background="castle" interactable="false"  autorotatespeed="0.1"  ></model3D>
-        <img src="./resources/duck.jpg"/>
-        <img src="./resources/duck.jpg"/>
-        <model3D src="./resources/enterprise/scene.gltf" camerapos="9.9 1.3 12"  background="bridge" fov="30" ></model3D>
-        <img src="./resources/duck.jpg"/>
-        <img src="./resources/duck.jpg"/>
-        <model3D src="./resources/dinosaur/scene.gltf" camerapos="-1 3 5.5" lookat="0 1 0" lightcolor="#c78252" ></model3D>
-        <img src="./resources/duck.jpg"/>
-        <model3D camerapos="-194 141 171" background="bridge" src="./resources/car/scene.gltf"></model3D>
-        <img src="./resources/duck.jpg"/>
+    <div>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="padding: 10px;">
+                <h1>3D net zo makkelijk als een plaatje</h1>
+                
+                <p>
+                    Stel je bent een website over dinos aan het lezen en ineens komen ze tot leven<br>
+                    <code>&lt;model3D src=&quot;./resources/dinosaur/scene.gltf&quot;&gt;&lt;/model3D&gt;</code>
+                    <model3D style="width: 400px; height: 250px;" src="./resources/dinosaur/scene.gltf" camerapos="-1 3 5.5" lookat="0 1 0" lightcolor="#c78252" ></model3D>
+                    
+                </p>
+            </div>
+            <div style="height: 500px; padding: 10px; width: 50%;">
+                <p style="text-align: center;">3D webpagina gemaakt door Luuk</p>
+                <model3D style="width: 100%; height: 500px;" src="./resources/perplex/scene.gltf" camerapos="0.4 0.1 -0.0" lookat="-0.0 0.1 -0.0" lockY="true"></model3D>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <div style="height: 500px; width: 50%;">
+                <p style="padding: 10px; text-align: center;">3D objecten van andere websites</p>
+                <model3D style="height: 500px;" src="./resources/mask/scene.gltf" camerapos="0 0 0.5" background="castle" interactable="false"  autorotatespeed="0.1"  ></model3D>
+            </div>
+            <div style="height: 500px; width: 50%;">
+                <p style="padding: 10px; text-align: center;">Het perplexkantoor gemaakt door Peter</p>
+                <model3D style="height: 500px;" src="./resources/peter/perplex.glb" camerapos="-2.3 5.5 6.5" lookat="0.0 2.1 -1.2" lightcolor="#bbb"></model3D>
+            </div>
+        </div>
+
+
+        <div style="display: flex; justify-content: space-between; margin-top: 100px;">
+            <div style="padding: 10px;">
+                <h1>Handige instellingen</h1>
+                <p>Er is van alles in te stellen. Het meeste staat automatisch al goed maar er zijn een paar belangrijke.</p>
+                <pre>
+src                 pad naar het 3Dmodel
+background          achtergrond plaatje
+interactable        of de gebruiker het model kan ronddraaien
+lockY               zorgt ervoor dat de camera niet verticaal kan draaien
+autorotatespeed     draait het model automatisch rond
+cameratype          perspective of ortho
+camerapos           posite van de camera
+lookat              waar de camera naar kijkt
+fov                 field of view van de camera
+transparent         maakt de achtergrond transparant zodat je originele website nog op de achtergrond ziet
+lightcolor          kleur van het licht
+
+&lt;model3D src=&quot;./resources/enterprise/scene.gltf&quot; camerapos=&quot;9.9 1.3 12&quot;  background=&quot;bridge&quot; fov=&quot;30&quot; &gt;&lt;/model3D&gt;
+                </pre>
+            </div>
+            <model3D style="height:500px; width: 50%;" src="./resources/enterprise/scene.gltf" camerapos="9.9 1.3 12"  background="bridge" fov="30" ></model3D>
+        </div>
     </div>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/controls/OrbitControls.js"></script>
-    <script src="modelviewer.js"></script> -->
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="height: 500px; width: 50%;">
+            <p style="padding: 10px; text-align: center;">Het nieuwe perplex office gemaakt door Henk</p>
+            <model3D style="height: 500px;" src="./resources/henk/office.glb" camerapos="-2.7 2.8 2.8" lookat="0.3 -0.0 -0.4" ></model3D>
+        </div>
+    </div>
+    
     <script src="main.js" type="module"></script>
 </body>
 </html>
